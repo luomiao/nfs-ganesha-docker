@@ -1,0 +1,10 @@
+FROM centos:7
+MAINTAINER Miao Luo "miaol@vmware.com"
+
+RUN yum install -y xfsprogs-devel git
+RUN yum install gcc git cmake autoconf libtool bison flex doxygen openssl-devel gcc-c++ libuuid-devel nfs-utils make -y
+RUN git clone -b V2.4-stable https://github.com/nfs-ganesha/nfs-ganesha.git --recursive
+RUN mkdir -p /exports
+EXPOSE 2049/tcp
+ADD xfs.conf /xfs.conf
+ENTRYPOINT ["bash"]
